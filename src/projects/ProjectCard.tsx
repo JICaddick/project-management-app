@@ -5,14 +5,16 @@ function formatDescription(description: string): string {
 }
 // The difference between interfaces and types is that types can be used to define primitives, unions, and tuples, while interfaces can only be used to define objects. In addition, types can be used to define a type alias, while interfaces cannot.
 // interfaces are preferred over types when defining props for a component. The reason for this is that interfaces can be extended, while types cannot. This means that if you want to add a new prop to a component, you can simply extend the interface, instead of having to change the type definition.
+// onEdit is a callback function that will be called when the Edit button is clicked. The callback function will be passed the project that is being edited. It returns a void value.
 interface ProjectCardProps {
   project: Project;
+  onEdit: (project: Project) => void;
 }
 
 function ProjectCard(props: ProjectCardProps) {
-  const { project } = props;
+  const { project, onEdit } = props;
   const handleEditClick = (projectBeingEdited: Project) => {
-    console.log(projectBeingEdited);
+    onEdit(projectBeingEdited);
   };
   return (
     <div className="card">
