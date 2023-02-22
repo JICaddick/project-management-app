@@ -1,4 +1,5 @@
 import { Project } from "./Project";
+import { Link } from "react-router-dom";
 
 function formatDescription(description: string): string {
   return description.substring(0, 60) + "...";
@@ -18,23 +19,26 @@ function ProjectCard(props: ProjectCardProps) {
   };
   return (
     <div className="card">
-      <img src={project.imageUrl} alt={project.name} />
-      <section className="section dark">
-        <h5 className="strong">
-          <strong>{project.name}</strong>
-        </h5>
-        <p>{formatDescription(project.description)}</p>
-        <p>Budget : {project.budget.toLocaleString()}</p>
-        <button
-          className=" bordered"
-          onClick={() => {
-            handleEditClick(project);
-          }}
-        >
-          <span className="icon-edit "></span>
-          Edit
-        </button>
-      </section>
+    <img src={project.imageUrl} alt={project.name} />
+    <section className="section dark">
+    <Link to={'/projects/' + project.id}>
+      <h5 className="strong">
+        <strong>{project.name}</strong>
+      </h5>
+      <p>{formatDescription(project.description)}</p>
+      <p>Budget: ${project.budget.toLocaleString()}</p>
+      </Link>
+      <button
+        className="bordered"
+        onClick={() => {
+          handleEditClick(project);
+          //handleEditClick is a callback function that will be called when the Edit button is clicked. The callback function will be passed the project that is being edited. It returns a void value.
+        }}
+      >
+        <span className="icon-edit "></span>
+        Edit
+      </button>
+    </section>
     </div>
   );
 }
